@@ -2015,3 +2015,65 @@ a.tag[data-ref="learn new tech" i]::before {
 }
 
 ////////////////////////////////////////////////////// Aaron Addins
+
+/* numbered lists 0.3 20210605 */
+/* usage : tag parent block with #numlist or #.v-numlist*/
+
+.ls-block[data-refs-self*="numlist"]
+    > .block-children
+	> .ls-block {
+          counter-increment: lvlNumber;
+		  }
+.ls-block[data-refs-self*="numlist"]
+ > .block-children
+ > .ls-block > div > div > a > .bullet-container:before {
+         content: counters(lvlNumber, ".") ":";
+         position: absolute;
+		 display: block;
+}
+.ls-block[data-refs-self*="numlist"]
+    > .block-children
+	> .ls-block > .block-children
+	> .ls-block {
+          counter-increment: sublvlNumber;
+		  }
+.ls-block[data-refs-self*="numlist"]
+ > .block-children
+ > .ls-block > .block-children > .ls-block > div > div > a > .bullet-container:before {
+        content: counters(lvlNumber, ".") "." counters(sublvlNumber, ".") ":";
+        position: absolute;
+		 max-width: 60px;
+	 	padding-right: 0px;
+	    width: 40px;
+}
+.ls-block[data-refs-self*="numlist"]
+ > .block-children
+ > .ls-block > .block-children > .ls-block > div > div > .block-control {
+	 	width: 30px !important;
+	 margin-left: -0.75em;
+}
+.ls-block[data-refs-self*="numlist"]
+ > .block-children
+ > .ls-block > .block-children  {
+		padding-left: 0.4em;
+}
+
+/* hide bullets */
+	.ls-block[data-refs-self*="numlist"]
+	 > .block-children
+	 > .ls-block
+	 > .block-children div .bullet-container:before {
+		content: "";
+	}
+	.ls-block[data-refs-self*="numlist"]
+	 > .block-children
+	 > .ls-block  > div > div > a > .bullet-container > .bullet {
+		visibility: hidden;
+	}
+	.ls-block[data-refs-self*="numlist"]
+	 > .block-children
+	 > .ls-block
+	 > .block-children
+	 > .ls-block  > div > div > a > .bullet-container > .bullet {
+		visibility: hidden;
+	}
